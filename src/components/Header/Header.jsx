@@ -32,7 +32,7 @@ function Header({alertRef}) {
       </div>
       <div className={styles.blockNav}>
         <p className={styles.textMovie}>Movies</p>
-        <div>
+        <div className={styles}>
           <img src={iconHeart} alt="heart" />
         </div>
       </div>

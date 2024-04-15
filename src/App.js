@@ -5,11 +5,9 @@ import { MyContext } from "./ MyContext.js";
 import { Routes, Route } from "react-router-dom";
 import Landing from "./components/Landing/Landing.jsx";
 import MovieDetail from "./components/MovieDetail/MovieDetail.jsx";
-import ModalAddMovie from "./components/ModalAddMovie/ModalAddMovie.jsx";
 
 function App() {
   const [text, setText] = useState("");
-  const [dataMovies, setDataMovies] = useState([]);
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -21,22 +19,14 @@ function App() {
   };
   const alertRef = React.useRef(null);
 
-  useEffect(() => {
-    fetch("http://localhost:3000/movies/")
-      .then((response) => response.json())
-      .then((data) => {
-        setDataMovies(data);
-      });
-  }, []);
-
   return (
     <MyContext.Provider
       value={{
         text,
         setText,
-        dataMovies,
-        setDataMovies,
         handleClickOpen,
+        open,
+        handleClose
       }}
     >
       <div className={styles.mainBlock}>
@@ -45,7 +35,6 @@ function App() {
           <Route path="/" element={<Landing alertRef={alertRef} />}></Route>
           <Route path="/movie/:id" element={<MovieDetail />}></Route>
         </Routes>
-        <ModalAddMovie open={open} handleClose={handleClose} />
       </div>
     </MyContext.Provider>
   );

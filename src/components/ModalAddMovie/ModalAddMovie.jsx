@@ -6,8 +6,7 @@ import TextField from "@mui/material/TextField";
 import { useForm } from "react-hook-form";
 import { MyContext } from "../../ MyContext";
 
-function ModalAddMovie({ handleClose, open }) {
-  const { dataMovies, setDataMovies } = useContext(MyContext);
+function ModalAddMovie({ handleClose, open, dataMovies, setDataMovies, alertAddNewMovie }) {
 
   const { register, handleSubmit } = useForm();
 
@@ -32,7 +31,7 @@ function ModalAddMovie({ handleClose, open }) {
 
   const onSubmit = async (data) => {
     const newMovie = {
-      id: Math.floor(Math.random() * 10000),
+      id: String( Math.floor(Math.random() * 10000)),
       title: data.title,
       description: data.description,
       rating: data.rating,
@@ -46,6 +45,7 @@ function ModalAddMovie({ handleClose, open }) {
     await addMovie(newMovie);
 
     handleClose();
+    alertAddNewMovie.current.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (

@@ -1,10 +1,23 @@
 import React, { useContext } from "react";
 import styles from "./movies.module.css";
 import { MyContext } from "../../../ MyContext";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
+import { useEffect } from "react";
+import ModalAddMovie from "../../ModalAddMovie/ModalAddMovie";
+import MovieCard from "./MovieCard/MovieCard";
 
 function Movies({ alertRef }) {
-  const { text, setText, dataMovies, handleClickOpen } = useContext(MyContext);
+  const { text, setText, handleClickOpen, open, handleClose } =
+    useContext(MyContext);
+  const [dataMovies, setDataMovies] = useState([]);
+  const [favoriteData, setFavoriteData] = useState([]);
+  console.log(favoriteData, "ff");
+
+  const addFavoriteFilm = (id) => {
+    const movie = dataMovies.filter((item) => item.id === id);
+    setFavoriteData([...favoriteData, movie[0]]);
+  };
 
   function searchMovies(searchTerm, movies) {
     return movies.filter((movie) =>
@@ -12,10 +25,55 @@ function Movies({ alertRef }) {
     );
   }
 
+  const alertAddNewMovie = React.useRef(null);
+
+  const deleteMovie = (id) => {
+    axios
+      .delete("http://localhost:3000/movies/" + id)
+      .then(function (response) {
+        console.log(response);
+        setDataMovies(
+          dataMovies.filter((movie) => movie.id !== response.data.id)
+        );
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/movies/");
+        setDataMovies(response.data);
+      } catch (error) {
+        console.error("Error fetching movies:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const filteredMovies = searchMovies(text, dataMovies);
 
   return (
     <div ref={alertRef} className={styles.mainBlock}>
+     {favoriteData.length !== 0 && <div className={styles.blockFavoriteMovies}>
+        <p className={styles.titleBlock}> Favorite Movies</p>
+        <div className={styles.blockCards}>
+          {favoriteData.map((item, index) => (
+             <MovieCard
+             item={item}
+             key={index}
+             favoriteFilm={true}
+           />
+          ))}
+          <div className={styles.filterBlock}></div>
+        <div className={styles.filterBlock}></div>
+        <div className={styles.filterBlock}></div>
+        <div className={styles.filterBlock}></div>
+        </div>
+      </div>}
       <div className={styles.blockTitle}>
         <p className={styles.titleBlock}>
           {text === "" ? "Movies" : `Search movie "${text}"`}
@@ -33,32 +91,29 @@ function Movies({ alertRef }) {
         ) : (
           dataMovies.length > 0 &&
           filteredMovies.map((item, index) => (
-            <div key={index} className={styles.movieCard}>
-              <Link to={`/movie/${item.id}`}>
-                <div className={styles.ratingLiba}>
-                  <p className={styles.textRating}>{item.rating}</p>
-                </div>
-                <img
-                  src={item.image}
-                  alt="img film"
-                  className={styles.imgMovie}
-                />
-                <div>
-                  <p className={styles.titleMovie}>{item.title}</p>
-                  <p className={styles.yearMovie}>
-                    {item.release_date.slice(0, 4)}
-                  </p>
-                </div>
-              </Link>
-            </div>
+            <MovieCard
+              item={item}
+              key={index}
+              deleteMovie={deleteMovie}
+              alertAddNewMovie={alertAddNewMovie}
+              addFavoriteFilm={addFavoriteFilm}
+              favoriteFilm={false}
+            />
           ))
         )}
-        <div className={styles.filterBlock}></div>
+        <div ref={alertAddNewMovie} className={styles.filterBlock}></div>
         <div className={styles.filterBlock}></div>
         <div className={styles.filterBlock}></div>
         <div className={styles.filterBlock}></div>
         <div className={styles.filterBlock}></div>
       </div>
+      <ModalAddMovie
+        open={open}
+        handleClose={handleClose}
+        dataMovies={dataMovies}
+        setDataMovies={setDataMovies}
+        alertAddNewMovie={alertAddNewMovie}
+      />
     </div>
   );
 }

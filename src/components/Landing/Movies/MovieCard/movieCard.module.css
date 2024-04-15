@@ -1,0 +1,76 @@
+.movieCard {
+  width: 256px;
+  height: 450px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.imgMovie {
+  width: 100%;
+  height: 344px;
+  border-radius: 10px;
+}
+
+.titleMovie {
+  font-size: 16px;
+  color: white;
+  font-weight: 400;
+}
+
+.yearMovie {
+  font-size: 14px;
+  color: white;
+  font-weight: 200;
+  font-style: italic;
+}
+
+.ratingLiba {
+  width: 50px;
+  height: 30px;
+  position: absolute;
+  background-color: #ff9a00;
+  border-radius: 0 15px 15px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 0;
+  top: 10px;
+}
+
+.textRating {
+  font-size: 12px;
+  color: white;
+}
+
+.blockCards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.btnDelete {
+  border: none;
+  background-color: transparent;
+  background-color: #ff0000;
+  border-radius: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.btnaddFavorite {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.blockBtncard {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: flex-end;
+  position: absolute;
+  bottom: 0;
+}
