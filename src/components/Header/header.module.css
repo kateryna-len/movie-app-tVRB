@@ -9,11 +9,11 @@
   font-style: normal;
   color: white;
   font-family: "Poppins", sans-serif;
+  padding: 0 20px;
 }
 
 .textLogo {
   font-size: 32px;
-  margin-left: 20px;
 }
 
 .searchInput {
@@ -26,13 +26,12 @@
   border-radius: 25px;
   font-size: 16px;
   background-color: white;
-  padding: 16px 20px 16px 40px;
+  padding: 10px 20px 10px 40px;
   background-position-x: 95%;
 }
+
 .blockNav {
-  display: flex;
-  align-items: center;
-  gap: 20px;
+  width: 300px;
 }
 
 .textMovie {
@@ -42,6 +41,42 @@
 
 @media (max-width: 1540px) {
   .mainblock {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1100px) {
+  .blockNav {
+    display: none;
+  }
+}
+
+@media (max-width: 750px) {
+  .mainblock {
+    flex-direction: column;
+    height: 120px;
+    padding: 15px 20px;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .blockSearch {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .textLogo {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 550px) {
+  .blockSearch form {
+    width: 100%;
+  }
+  .searchInput {
     width: 100%;
   }
 }

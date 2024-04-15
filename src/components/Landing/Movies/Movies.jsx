@@ -8,7 +8,7 @@ import ModalAddMovie from "../../ModalAddMovie/ModalAddMovie";
 import MovieCard from "./MovieCard/MovieCard";
 
 function Movies({ alertRef }) {
-  const { text, setText, handleClickOpen, open, handleClose } =
+  const { searchValue, setSearchValue, handleClickOpen, open, handleClose } =
     useContext(MyContext);
   const [dataMovies, setDataMovies] = useState([]);
   const [favoriteData, setFavoriteData] = useState([]);
@@ -54,32 +54,30 @@ function Movies({ alertRef }) {
     fetchData();
   }, []);
 
-  const filteredMovies = searchMovies(text, dataMovies);
+  const filteredMovies = searchMovies(searchValue, dataMovies);
 
   return (
     <div ref={alertRef} className={styles.mainBlock}>
-     {favoriteData.length !== 0 && <div className={styles.blockFavoriteMovies}>
-        <p className={styles.titleBlock}> Favorite Movies</p>
-        <div className={styles.blockCards}>
-          {favoriteData.map((item, index) => (
-             <MovieCard
-             item={item}
-             key={index}
-             favoriteFilm={true}
-           />
-          ))}
-          <div className={styles.filterBlock}></div>
-        <div className={styles.filterBlock}></div>
-        <div className={styles.filterBlock}></div>
-        <div className={styles.filterBlock}></div>
+      {favoriteData.length !== 0 && (
+        <div className={styles.blockFavoriteMovies}>
+          <p className={styles.titleBlock}> Favorite Movies</p>
+          <div className={styles.blockCards}>
+            {favoriteData.map((item, index) => (
+              <MovieCard item={item} key={index} favoriteFilm={true} />
+            ))}
+            <div className={styles.filterBlock}></div>
+            <div className={styles.filterBlock}></div>
+            <div className={styles.filterBlock}></div>
+            <div className={styles.filterBlock}></div>
+          </div>
         </div>
-      </div>}
+      )}
       <div className={styles.blockTitle}>
         <p className={styles.titleBlock}>
-          {text === "" ? "Movies" : `Search movie "${text}"`}
+          {searchValue === "" ? "Movies" : `Search movie "${searchValue}"`}
         </p>
-        {text !== "" ? (
-          <button onClick={() => setText("")}>Show all movies</button>
+        {searchValue !== "" ? (
+          <button onClick={() => setSearchValue("")}>Show all movies</button>
         ) : (
           <button onClick={() => handleClickOpen()}>Add new movie</button>
         )}

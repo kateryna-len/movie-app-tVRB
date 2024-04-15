@@ -7,7 +7,7 @@ import Landing from "./components/Landing/Landing.jsx";
 import MovieDetail from "./components/MovieDetail/MovieDetail.jsx";
 
 function App() {
-  const [text, setText] = useState("");
+  const [searchValue, setSearchValue] = useState("");
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -22,8 +22,8 @@ function App() {
   return (
     <MyContext.Provider
       value={{
-        text,
-        setText,
+        searchValue,
+        setSearchValue,
         handleClickOpen,
         open,
         handleClose

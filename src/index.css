@@ -17,7 +17,7 @@ a {
 
 .swiper {
   width: 1550px;
-  height: auto;
+  height: 450px;
   top: 40px;
 }
 
@@ -80,4 +80,22 @@ a {
 
 .css-jedpe8-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
   font-weight: 700;
+}
+
+@media (max-width: 1050px) {
+  .swiper {
+    height: 350px;
+  }
+}
+
+@media (max-width: 750px) {
+  .swiper {
+    height: 250px;
+  }
+}
+
+@media (max-width: 750px) {
+  .swiper {
+    height: 200px;
+  }
 }

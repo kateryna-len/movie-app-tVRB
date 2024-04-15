@@ -1,41 +1,42 @@
 import React, { useContext } from "react";
 import styles from "./header.module.css";
-import logo from "../../image/logoMovie.jpg";
 import { MyContext } from "../../ MyContext";
-import iconHeart from "../../image/heartIcon.svg";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-function Header({alertRef}) {
-  const { text, setText } = useContext(MyContext);
+function Header({ alertRef }) {
+  const { setSearchValue } = useContext(MyContext);
+
   const { register, handleSubmit, reset } = useForm();
 
+  const usePathname = () => {
+    const location = useLocation();
+    return location.pathname;
+  };
+
   const onSubmit = (data) => {
-    console.log(data);
-    alertRef.current.scrollIntoView({ behavior: 'smooth' });
-    setText(data.search)
-    reset()
-    
+    alertRef.current.scrollIntoView({ behavior: "smooth" });
+    setSearchValue(data.search);
+    reset();
   };
 
   return (
     <div className={styles.mainblock}>
-     <Link to="/"> <h1 className={styles.textLogo}>Movie Honey</h1></Link>
-      <div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <input
-            placeholder="Search movies...."
-            className={styles.searchInput}
-            {...register("search")}
-          />
-        </form>
-      </div>
-      <div className={styles.blockNav}>
-        <p className={styles.textMovie}>Movies</p>
-        <div className={styles}>
-          <img src={iconHeart} alt="heart" />
+      <Link to="/">
+        <h1 className={styles.textLogo}>Honey Movie</h1>
+      </Link>
+      {usePathname() === "/" && (
+        <div className={styles.blockSearch}>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <input
+              placeholder="Search movies...."
+              className={styles.searchInput}
+              {...register("search")}
+            />
+          </form>
         </div>
-      </div>
+      )}
+      <div className={styles.blockNav}></div>
     </div>
   );
 }

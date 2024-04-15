@@ -4,8 +4,9 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import styles from "./mainBaner.module.css";
-import avatarImg from "../../../image/swiperSlide1.png";
+import threeBodyMovie from "../../../image/threeBodyMovie.webp";
 import minionsImg from "../../../image/minionsImg.webp";
+import duneMovie from "../../../image/duneMovie.jpeg";
 
 function MainBaner() {
   return (
@@ -19,7 +20,21 @@ function MainBaner() {
       >
         <SwiperSlide>
           <img
-            src={avatarImg}
+            src={duneMovie}
+            alt="coffe"
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
+          />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img
+            src={threeBodyMovie}
             alt="coffe"
             width={0}
             height={0}
@@ -34,20 +49,6 @@ function MainBaner() {
         <SwiperSlide>
           <img
             src={minionsImg}
-            alt="coffe"
-            width={0}
-            height={0}
-            sizes="100vw"
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-            }}
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            src={avatarImg}
             alt="coffe"
             width={0}
             height={0}
