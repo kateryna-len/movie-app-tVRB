@@ -1,0 +1,94 @@
+.mainBlock {
+  width: 1540px;
+  padding: 100px 100px 0px;
+  background-color: black;
+  color: white;
+  min-height: calc(100vh - 90px);
+  font-weight: 500;
+}
+
+.blockMove {
+  display: flex;
+  gap: 30px;
+}
+
+.imgMovie {
+  width: 352px;
+  height: 575px;
+  border-radius: 10px;
+}
+.blockGenres {
+  display: flex;
+  gap: 10px;
+}
+
+.blockGenere {
+  color: black;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: white;
+  font-weight: 300;
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+.blockTitle {
+  display: flex;
+  align-items: center;
+  gap: 100px;
+  margin-bottom: 30px;
+}
+
+.title {
+  font-size: 34px;
+  font-weight: 600;
+  width: 55%;
+}
+
+.btnFavorite {
+  width: 190px;
+  height: 56px;
+  background-color: #ff0000;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: center;
+  font-weight: 500;
+}
+
+.blockIconDate {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+}
+
+.containerFlex {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.description {
+  font-size: 16px;
+  line-height: 20px;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+.blockAdditionInfo {
+  display: flex;
+  gap: 10px;
+  font-size: 16px;
+}
+
+@media (max-width: 1540px) {
+  .mainBlock {
+    width: 100%;
+  }
+}

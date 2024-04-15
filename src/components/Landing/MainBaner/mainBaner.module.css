@@ -1,0 +1,9 @@
+.mainBlock {
+  width: 1540px;
+}
+
+@media (max-width: 1540px) {
+  .mainBlock {
+    width: 100%;
+  }
+}
