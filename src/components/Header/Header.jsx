@@ -4,8 +4,8 @@ import { MyContext } from "../../ MyContext";
 import { useForm } from "react-hook-form";
 import { Link, useLocation } from "react-router-dom";
 
-function Header({ alertRef }) {
-  const { setSearchValue } = useContext(MyContext);
+function Header() {
+  const { setSearchValue, alertRef } = useContext(MyContext);
 
   const { register, handleSubmit, reset } = useForm();
 

@@ -1,7 +1,7 @@
 .mainBlock {
   width: 1540px;
   background-color: black;
-  padding: 50px 20px 20px;
+  padding: 50px 20px 150px;
 }
 
 .titleBlock {
@@ -9,6 +9,13 @@
   font-weight: 600;
   color: white;
   margin-bottom: 50px;
+}
+
+.searchText {
+  font-size: 24px;
+  font-weight: 600;
+  color: white;
+  text-transform: capitalize;
 }
 
 .blockTitle {
@@ -43,5 +50,14 @@
 @media (max-width: 1540px) {
   .mainBlock {
     width: 100%;
+  }
+}
+
+@media (max-width: 550px) {
+  .blockTitle button {
+    width: 100px;
+    height: 40px;
+    border-radius: 30px;
+    font-size: 10px;
   }
 }

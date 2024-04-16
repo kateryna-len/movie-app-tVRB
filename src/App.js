@@ -8,15 +8,6 @@ import MovieDetail from "./components/MovieDetail/MovieDetail.jsx";
 
 function App() {
   const [searchValue, setSearchValue] = useState("");
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
   const alertRef = React.useRef(null);
 
   return (
@@ -24,15 +15,13 @@ function App() {
       value={{
         searchValue,
         setSearchValue,
-        handleClickOpen,
-        open,
-        handleClose
+        alertRef
       }}
     >
       <div className={styles.mainBlock}>
-        <Header alertRef={alertRef} />
+        <Header />
         <Routes>
-          <Route path="/" element={<Landing alertRef={alertRef} />}></Route>
+          <Route path="/" element={<Landing />}></Route>
           <Route path="/movie/:id" element={<MovieDetail />}></Route>
         </Routes>
       </div>

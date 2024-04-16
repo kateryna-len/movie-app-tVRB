@@ -6,13 +6,38 @@ import { useState } from "react";
 import { useEffect } from "react";
 import ModalAddMovie from "../../ModalAddMovie/ModalAddMovie";
 import MovieCard from "./MovieCard/MovieCard";
+import ModalWarningDelete from "../../ModalAddMovie/ModalWarningDelete";
 
-function Movies({ alertRef }) {
-  const { searchValue, setSearchValue, handleClickOpen, open, handleClose } =
-    useContext(MyContext);
+function Movies() {
+  const { searchValue, setSearchValue, alertRef } = useContext(MyContext);
+
+  const [open, setOpen] = React.useState(false);
+  const [openWarnDelete, setOpenWarnDelete] = useState(false);
+  const [movieChooseDelete, setMovieChooseDelete] = useState({
+    name: "",
+    id: "",
+  });
   const [dataMovies, setDataMovies] = useState([]);
   const [favoriteData, setFavoriteData] = useState([]);
-  console.log(favoriteData, "ff");
+
+  const alertAddNewMovie = React.useRef(null);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const closeModalWarnDelete = () => {
+    setOpenWarnDelete(false);
+  };
+
+  const handleOpenModalDelete = (name, id) => {
+    setOpenWarnDelete(true);
+    setMovieChooseDelete({ name: name, id: id });
+  };
 
   const addFavoriteFilm = (id) => {
     const movie = dataMovies.filter((item) => item.id === id);
@@ -25,16 +50,14 @@ function Movies({ alertRef }) {
     );
   }
 
-  const alertAddNewMovie = React.useRef(null);
-
   const deleteMovie = (id) => {
     axios
       .delete("http://localhost:3000/movies/" + id)
       .then(function (response) {
-        console.log(response);
         setDataMovies(
           dataMovies.filter((movie) => movie.id !== response.data.id)
         );
+        closeModalWarnDelete();
       })
       .catch(function (error) {
         console.log(error);
@@ -74,7 +97,7 @@ function Movies({ alertRef }) {
       )}
       <div className={styles.blockTitle}>
         <p className={styles.titleBlock}>
-          {searchValue === "" ? "Movies" : `Search movie "${searchValue}"`}
+          {searchValue === "" ? "Movies" : `Search result "${searchValue}"`}
         </p>
         {searchValue !== "" ? (
           <button onClick={() => setSearchValue("")}>Show all movies</button>
@@ -82,6 +105,9 @@ function Movies({ alertRef }) {
           <button onClick={() => handleClickOpen()}>Add new movie</button>
         )}
       </div>
+      {filteredMovies.length === 0 && (
+        <p className={styles.searchText}>NO RESULTS FOUND</p>
+      )}
 
       <div className={styles.blockCards}>
         {dataMovies.length === 0 ? (
@@ -92,10 +118,10 @@ function Movies({ alertRef }) {
             <MovieCard
               item={item}
               key={index}
-              deleteMovie={deleteMovie}
               alertAddNewMovie={alertAddNewMovie}
               addFavoriteFilm={addFavoriteFilm}
               favoriteFilm={false}
+              handleOpenModalDelete={handleOpenModalDelete}
             />
           ))
         )}
@@ -105,12 +131,19 @@ function Movies({ alertRef }) {
         <div className={styles.filterBlock}></div>
         <div className={styles.filterBlock}></div>
       </div>
+
       <ModalAddMovie
         open={open}
         handleClose={handleClose}
         dataMovies={dataMovies}
         setDataMovies={setDataMovies}
         alertAddNewMovie={alertAddNewMovie}
+      />
+      <ModalWarningDelete
+        deleteMovie={deleteMovie}
+        movieChooseDelete={movieChooseDelete}
+        openWarnDelete={openWarnDelete}
+        closeModalWarnDelete={closeModalWarnDelete}
       />
     </div>
   );

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import deleteIcon from "../../../../image/delete.svg";
 import iconHeart from "../../../../image/heartIcon.svg";
 
-function MovieCard({item, key, deleteMovie, addFavoriteFilm, favoriteFilm}) {
+function MovieCard({handleOpenModalDelete, item, key, addFavoriteFilm, favoriteFilm}) {
   return (
     <>
     <div key={key} className={styles.movieCard}>
@@ -26,7 +26,7 @@ function MovieCard({item, key, deleteMovie, addFavoriteFilm, favoriteFilm}) {
     </Link>
     <div className={styles.blockBtncard}>
     {!favoriteFilm && <button className={styles.btnaddFavorite} onClick={()=> addFavoriteFilm(item.id)}><img src={iconHeart} alt="heart" /></button>} 
-         {!favoriteFilm && <button className={styles.btnDelete} onClick={() => deleteMovie(item.id)}><img src={deleteIcon} alt="icon"/></button>}
+         {!favoriteFilm && <button className={styles.btnDelete} onClick={()=>handleOpenModalDelete(item.title, item.id)}><img src={deleteIcon} alt="icon"/></button>}
 
     </div>
 

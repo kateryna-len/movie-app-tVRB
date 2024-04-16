@@ -6,7 +6,7 @@ function Landing({ alertRef }) {
   return (
     <>
       <MainBaner />
-      <Movies alertRef={alertRef} />
+      <Movies/>
     </>
   );
 }
