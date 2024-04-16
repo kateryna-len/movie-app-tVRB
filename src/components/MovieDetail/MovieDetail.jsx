@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 import styles from "./movieDetail.module.css";
 import { useParams } from "react-router-dom";
-import { MyContext } from "../../ MyContext";
 import iconPencil from "../../image/pencilIcon.svg";
 import data from "../../image/date.svg";
 import star from "../../image/star.svg";
